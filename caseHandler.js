@@ -15,12 +15,12 @@ function caseHandler(string) {
 
   return new Promise (function (resolve, reject) {
     switch(firstWord) {
-      case "dream":
-        dreamRequest(restWords)
-          .then(function(result) {
-            resolve(result)
-          })
-        break;
+      // case "dream":
+      //   dreamRequest(restWords)
+      //     .then(function(result) {
+      //       resolve(result)
+      //     })
+      //   break;
       case "movie":
         movieCase(restWords)
           .then(function(result) {
