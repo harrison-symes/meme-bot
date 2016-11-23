@@ -6,31 +6,41 @@ module.exports = caseHandler
 function caseHandler(string) {
 
   const text = string.toLowerCase()
-  console.log("full text ", text)
   const words = string.split(' ')
   const firstWord = words[0]
-  console.log('first word ', firstWord)
   words.splice(0, 1)
   var restWords = words.join(' ')
-  console.log("rest", restWords)
 
-  switch(firstWord) {
-    case "dream":
-      return "is but a dream, friend";
-    case "movie":
-      return movieCase(restWords)
-    default:
-      return textCase(text)
-  }
+
+  return new Promise (function (resolve, reject) {
+    switch(firstWord) {
+      case "dream":
+        resolve( "is but a dream, friend");
+        break;
+      case "movie":
+        movieCase(restWords)
+          .then(function(result) {
+            resolve(result)
+          })
+        break;
+
+      default:
+        resolve(textCase(text))
+    }
+  })
 
 }
 
-function movieCase(text) {
-  switch(text) {
-    default:
-      //return "https://www.youtube.com/watch?v=E6iN6VTL7v8"
-      return movieRequest(text)
-  }
+function movieCase(restWords) {
+  return new Promise (function (resolve, reject) {
+    movieRequest(restWords)
+      .then(function(result) {
+        console.log("got result " , result)
+        console.log("type: ", typeof result)
+        if (result === undefined) reject(result)
+        resolve(result)
+      })
+    })
 }
 
 function textCase(text) {

@@ -14,5 +14,23 @@ function movieRequest(title) {
   console.log("url", urlText)
   //request
 
-  return url
+  return new Promise (function (resolve, reject) {
+    request
+      .get(url)
+      .end(function(err, res){
+        console.log("gotem", res.body.Title)
+        if (err) reject(err)
+        else resolve(res.body.Plot)
+
+        // return JSON.stringify(res.body.Plot)
+      })
+  })
+
+    // .then(function(err, res) {
+    //   if(err) return "error"
+    //   console.log('request ', res.body)
+    //   callback(url)
+    // })
+
+
 }
