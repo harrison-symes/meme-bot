@@ -1,4 +1,5 @@
 const movieRequest = require('./movieRequest')
+const dreamRequest = require('./dreamRequest')
 
 module.exports = caseHandler
 
@@ -15,7 +16,10 @@ function caseHandler(string) {
   return new Promise (function (resolve, reject) {
     switch(firstWord) {
       case "dream":
-        resolve( "is but a dream, friend");
+        dreamRequest(restWords)
+          .then(function(result) {
+            resolve(result)
+          })
         break;
       case "movie":
         movieCase(restWords)
