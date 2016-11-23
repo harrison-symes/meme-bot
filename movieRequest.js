@@ -19,18 +19,11 @@ function movieRequest(title) {
       .get(url)
       .end(function(err, res){
         console.log("gotem", res.body.Title)
-        if (err) reject(err)
+        if (err) reject("Did you mean Bee Movie?")
+        if (res.body === undefined) resolve("Did you mean Bee Movie?")
         else resolve(res.body.Plot)
-
-        // return JSON.stringify(res.body.Plot)
       })
   })
-
-    // .then(function(err, res) {
-    //   if(err) return "error"
-    //   console.log('request ', res.body)
-    //   callback(url)
-    // })
 
 
 }
